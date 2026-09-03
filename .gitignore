@@ -1,0 +1,47 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# ===== 虚拟环境 =====
+.venv/
+venv/
+env/
+ENV/
+
+# ===== IDE / 编辑器 =====
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# ===== Jupyter =====
+.ipynb_checkpoints/
+
+# ===== 大数据文件（体积大，不要直接提交）=====
+*.csv
+*.xlsx
+*.parquet
+*.hdf5
+*.h5
+data/
+raw_data/
+datasets/
+
+# ===== 机器学习产物 =====
+*.pkl
+*.joblib
+*.onnx
+*.pt
+*.pth
+mlruns/
+wandb/
+
+# ===== 日志 / 临时文件 =====
+*.log
+*.tmp
+*.cache
