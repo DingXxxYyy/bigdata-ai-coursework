@@ -45,3 +45,80 @@ wandb/
 *.log
 *.tmp
 *.cache
+
+# ==========================================================
+# ===== 敏感信息：密钥 / 密码 / 凭据（务必不要提交） =====
+# ==========================================================
+
+# ----- 环境变量文件（最常见放 API Key / 密码的地方）-----
+.env
+.env.*
+.env.local
+.env.*.local
+# 允许提交 .env.example 模板（只含占位符，不含真实密钥）
+!.env.example
+.envrc
+*.env
+
+# ----- 通用密钥 / 凭据 / 配置文件 -----
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.cer
+*.crt
+*.pub
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+secrets.*
+secret.*
+*.secret
+credentials
+credentials.json
+config.local.*
+settings.local.*
+application-local.*
+*.properties.local
+*.ini.local
+docker-compose.override.yml
+
+# ----- 云厂商与第三方平台凭据 -----
+# AWS
+.aws/
+aws_credentials
+# 常见 SDK / 服务会生成的凭据与缓存
+**/.credentials/
+**/.config/gcloud/
+service-account*.json
+gcloud-service-key.json
+google-application-credentials.json
+*.iam.gserviceaccount.com.json
+# 通用
+*.auth
+.auth/
+
+# ----- 各类前端 / 脚手架本地敏感文件 -----
+*.local
+.DS_Store
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
+next-env.d.ts
+
+# 注：*.pub 一般可公开，但此处一并忽略避免误提交私钥配套文件；如确需提交公钥请手动调整。
+
+# ==========================================================
+# ===== 工具缓存 / 构建产物（可选扩展） =====
+# ==========================================================
+node_modules/
+*.min.js.map
+coverage/
+.hypothesis/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

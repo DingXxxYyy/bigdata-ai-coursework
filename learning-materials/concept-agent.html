@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>概念学习 · Agent（智能体）</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1f2430; --muted:#5b6472;
+    --line:#e6e9ef; --brand:#2f6fed; --brand-soft:#eaf1ff;
+    --accent:#0f8a5f; --accent-soft:#e7f6ef; --warn:#b4540a; --warn-soft:#fdf1e3;
+    --code-bg:#f3f5f9;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:-apple-system,"Segoe UI","Microsoft YaHei",Roboto,sans-serif;
+       line-height:1.75;font-size:16px}
+  .wrap{max-width:880px;margin:0 auto;padding:32px 20px 80px}
+  header.hero{background:linear-gradient(135deg,#2f6fed 0%,#6b4fe0 100%);color:#fff;
+       border-radius:18px;padding:34px 34px 26px;margin-bottom:26px}
+  header.hero .tag{display:inline-block;background:rgba(255,255,255,.2);border-radius:999px;
+       padding:3px 12px;font-size:13px;margin-bottom:12px;letter-spacing:.5px}
+  header.hero h1{margin:0 0 8px;font-size:30px;line-height:1.3}
+  header.hero p{margin:0;opacity:.92;font-size:15px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .meta span{background:rgba(255,255,255,.16);padding:4px 10px;border-radius:8px;font-size:12.5px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+       padding:24px 26px;margin:18px 0}
+  h2{display:flex;align-items:center;gap:10px;font-size:21px;margin:0 0 6px;
+     color:#182036}
+  .num{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--brand-soft);
+       color:var(--brand);display:inline-flex;align-items:center;justify-content:center;
+       font-size:15px;font-weight:700}
+  .sec-sub{color:var(--muted);font-size:13.5px;margin:0 0 16px}
+  h3{font-size:16.5px;margin:20px 0 6px;color:#26304a}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px;padding-left:22px}
+  li{margin:4px 0}
+  .callout{border-left:4px solid var(--brand);background:var(--brand-soft);
+       border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0}
+  .callout.warn{border-color:var(--warn);background:var(--warn-soft)}
+  .callout.good{border-color:var(--accent);background:var(--accent-soft)}
+  .callout b{color:inherit}
+  pre{background:var(--code-bg);border:1px solid var(--line);border-radius:10px;
+      padding:14px 16px;overflow:auto;font-size:13.5px;line-height:1.6}
+  code{background:var(--code-bg);border-radius:5px;padding:1px 6px;font-family:ui-monospace,
+       "SFMono-Regular",Consolas,"Courier New",monospace;font-size:.9em}
+  pre code{background:none;padding:0}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14.5px}
+  th,td{border:1px solid var(--line);padding:8px 12px;text-align:left;vertical-align:top}
+  th{background:#f3f6fc;font-weight:600}
+  tr:nth-child(even) td{background:#fafbfe}
+  .sources a{color:var(--brand);text-decoration:none;word-break:break-all}
+  .sources a:hover{text-decoration:underline}
+  .quiz{background:#fbfcff;border:1px dashed var(--line);border-radius:10px;padding:14px 16px;margin:8px 0}
+  .quiz summary{cursor:pointer;font-weight:600;color:#2c3550}
+  .quiz p{margin:8px 0 0}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:26px}
+  footer .check{color:var(--accent)}
+  @media(max-width:600px){ .wrap{padding:16px 12px 60px} header.hero h1{font-size:24px}
+    section{padding:18px 16px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">概念学习资料 · Concept Learning</span>
+  <h1>Agent（智能体）</h1>
+  <p>在 AI 语境下，"Agent" 到底指什么？它与"工作流(Workflow)"有何区别？本文按 7 章节带你把一个概念从"会背定义"学到"能辨别、能使用、能自查"。</p>
+  <div class="meta">
+    <span>学科：人工智能 / 智能体系统</span>
+    <span>深度：系统掌握 + 应用导向</span>
+    <span>受众：零基础愿意投入</span>
+    <span>语言：中文</span>
+  </div>
+</header>
+
+<!-- 1 -->
+<section>
+  <h2><span class="num">1</span>个人解释（用自己的话）</h2>
+  <p class="sec-sub">先不背定义，先建立直觉。</p>
+
+  <h3>一句话本质</h3>
+  <p><b>Agent = 一个能"看情况自己拿主意去做事"的 AI 系统</b>——它不再只是回答你问题，而是为达成某个目标，主动决定"下一步做什么、调不调用工具、要不要改计划"，并循环执行直到完成。</p>
+
+  <h3>生活化比方</h3>
+  <p>把 Agent 想成一位<b>弹性很大的主厨</b>：顾客只说"今晚来客人，你看着办"。主厨自己决定逛几个菜场、买什么菜、做几道菜，途中发现缺一味调料还会临时调整，甚至打电话问客人忌口。相比之下，"工作流(Workflow)"更像<b>中央厨房的 SOP</b>：洗菜→切丁→下锅，路线是事先画死的，模型只是某些环节里的一双"巧手"。<span style="color:var(--muted)">（这个比方参考业界流传最广的解读方式）</span></p>
+
+  <h3>30 秒教外行版</h3>
+  <p>"普通聊天 AI 你问一句它答一句；Agent 是你给它一个目标，它会自己拆步骤、自己查资料、自己调工具、自己检查做完没有，一步步干完再向你交差——中间不用你一直盯着指挥。"</p>
+
+  <h3>关联锚点（帮你记住）</h3>
+  <p>如果你已了解"ChatGPT/大模型"，那么：<b>大模型是"大脑"，Agent 是"大脑＋身体＋自主性"的完整系统</b>。大脑负责思考，Agent 额外拥有"动手能力（工具）""记事能力（记忆）""自己定路线（规划）"——这也是一个概念体系里 Agent、Workflow、Tool 各自位置的起点。</p>
+</section>
+
+<!-- 2 -->
+<section>
+  <h2><span class="num">2</span>核心机制（How it works）</h2>
+  <p class="sec-sub">业界对 Agent 的组件划分高度一致，核心是"感知→决策→行动→再观察"的循环。</p>
+
+  <h3>一个反复出现的架构共识</h3>
+  <p>被广泛引用的 Lilian Weng 综述（OpenAI 应用研究负责人）提出，一个 LLM 驱动的自主 Agent 系统里，<b>LLM 当"大脑"，配三个支柱</b>：</p>
+  <ul>
+    <li><b>规划 Planning</b>——任务分解（把大目标拆成子目标）、反思改进（回顾自己做错什么、调整后续）。典型技术：思维链 CoT、ReAct（思考↔行动交替）、Reflexion（自我批评后重来）。</li>
+    <li><b>记忆 Memory</b>——短期记忆≈上下文窗口内的即时学习；长期记忆≈外部向量库＋检索，让 Agent 跨长时间记住东西。</li>
+    <li><b>工具使用 Tool use</b>——调用外部 API/代码/搜索，拿到模型训练时没有的信息，突破"只会凭记忆生成"的局限。</li>
+  </ul>
+  <div class="callout">
+    <b>另一个通用表述：</b>现代资料常把 Agent 拆成 5 大支柱——<b>基础模型(Foundation Model) / 记忆(Memory) / 规划(Planning) / 工具使用(Tool Use) / 行动执行(Action Execution)</b>。无论 3 支柱还是 5 支柱，思路一致：模型负责思考，周围配齐"记忆＋工具＋规划＋执行"。
+  </div>
+
+  <h3>关键区别：Workflow vs Agent（谁掌握控制权）</h3>
+  <p>Anthropic 的官方工程博客给出的判据最实用：把这类系统统称 <b>agentic systems</b>，再按<b>流程控制权在代码还是在模型</b>切两类：</p>
+  <table>
+    <tr><th>维度</th><th>Workflow（工作流）</th><th>Agent（自主智能体）</th></tr>
+    <tr><td>流程控制权</td><td>在代码，路径预先写死</td><td>在 LLM，模型动态决定下一步</td></tr>
+    <tr><td>是否用工具</td><td>可调用，但顺序固定</td><td>按当前状态自主选择工具与顺序</td></tr>
+    <tr><td>典型优点</td><td>稳定、可复现、易调试、成本可控</td><td>灵活、能处理开放/未知任务</td></tr>
+    <tr><td>典型代价</td><td>难以应对变化场景</td><td>延迟高、Token 贵、可能无效循环、难排障</td></tr>
+    <tr><td>生活比方</td><td>有轨列车（轨道铺好）</td><td>自动驾驶（按路况动态调）</td></tr>
+  </table>
+
+  <h3>Agent 循环（一次任务的运转过程）</h3>
+  <ol>
+    <li><b>接收目标</b>：得到用户目标与可用的工具/权限边界。</li>
+    <li><b>观察</b>：读取当前任务状态、用户请求、记忆里的相关信息。</li>
+    <li><b>决策</b>：由 LLM 判断下一步——回答、调工具、改计划、还是结束。</li>
+    <li><b>行动</b>：执行所选动作（调 API、跑代码、搜网页等），得到新结果。</li>
+    <li><b>再观察→循环</b>：把执行结果写回任务状态，再次进入"决策"，直到目标完成或需要人介入。</li>
+  </ol>
+  <div class="callout good">
+    <b>是否"必须"有规划模块？</b>不一定。简单任务可"走一步看一步"，逐个决策即可；复杂任务才值得先分解再执行。判断是不是真 Agent 的标准是：<b>它能否根据中间结果动态改变下一步，而不是照固定脚本走到底</b>。
+  </div>
+
+  <h3>最小代码直觉（骨架示意）</h3>
+  <pre><code># 伪代码：理解 Agent 的核心是"决策循环"，而非某个神秘框架
+goal = "帮用户查某公司最新季报并总结"
+state = {"goal": goal, "history": [], "done": False}
+
+while not state["done"]:
+    action = llm_choose_action(state)   # LLM 决定下一步（含用哪个工具）
+    if action == "search":              # 工具调用
+        result = search_tool(state["query"])
+        state["history"].append(result) # 观察结果并回写
+    elif action == "finish":
+        state["done"] = True
+# 提示：真实工程用 API 直连 + 函数调用(function calling)即可起步，
+# 多数模式几行代码就能实现，不一定要上重型框架。</code></pre>
+</section>
+
+<!-- 3 -->
+<section>
+  <h2><span class="num">3</span>应用场景（When / Where to use）</h2>
+  <p class="sec-sub">Agent 不是万能的，下列场景才真正需要它的"自主决策"。</p>
+
+  <h3>典型落地场景</h3>
+  <ul>
+    <li><b>多文件代码开发 / 修 Bug</b>：任务跨很多文件、每步改动面不一，需要读文件→查上下文→改代码→跑测试的自主闭环。<br><span style="color:var(--muted)">为什么适合：步骤数事先说不清，要靠模型临场决策。这也是 SWE-bench 类 Agent 的主流用法。</span></li>
+    <li><b>对话式客服 + 业务动作</b>：既要闲聊、又要查库、改工单、触发退款，需要"聊＋做"结合、且能从工具结果拿到强反馈。<br><span style="color:var(--muted)">为什么适合：信息源不可预知，动作多，反馈明确。</span></li>
+    <li><b>多源检索后的综合研究 / 报告</b>：从多个外部系统或网页抓取再整合，Agent 决定何时该再搜一轮、何时收尾。<br><span style="color:var(--muted)">为什么适合：评估"要不要继续搜"本身就是开放决策。</span></li>
+    <li><b>需要个性化与持续记忆的个人助手</b>：记住偏好、跨会话延续任务，靠长期记忆把上下文外置。</li>
+  </ul>
+
+  <h3>一条关键提醒（很多人踩坑）</h3>
+  <div class="callout warn">
+    <b>默认答案：越简单越好。</b>Anthropic 反复强调：先用"单次模型调用＋检索＋几个示例"做 baseline，够用就别上 Agent；需要更复杂时，先考虑 Workflow（要稳定一致时），再考虑 Agent（要临场决策时）。盲目追求"全自主 Agent"只会换更高延迟和账单。
+  </div>
+</section>
+
+<!-- 4 -->
+<section>
+  <h2><span class="num">4</span>边界辨析（Limits &amp; 易混辨析）</h2>
+  <p class="sec-sub">这个概念最容易在"名词混战"里被用错。</p>
+
+  <h3>易混辨析：三个近邻概念</h3>
+  <table>
+    <tr><th>对比维度</th><th>Agent</th><th>Workflow</th><th>单次 LLM 调用（增强检索）</th></tr>
+    <tr><td>决策权</td><td>模型动态决定</td><td>代码预设</td><td>一次性生成，无循环</td></tr>
+    <tr><td>有无循环</td><td>有（观察→决策→行动）</td><td>有，但顺序固定</td><td>无</td></tr>
+    <tr><td>工具调用</td><td>自主选、自主排</td><td>按脚本调用</td><td>通常无/简单注入</td></tr>
+    <tr><td>复杂度成本</td><td>最高</td><td>中</td><td>最低</td></tr>
+  </table>
+
+  <h3>常被误用的负面场景</h3>
+  <ul>
+    <li><b>任务边界清晰、步骤可枚举时硬上 Agent</b>——只会更贵更慢更难调试，此时 Workflow 或单次调用更合适。</li>
+    <li><b>把"套了 Agent 框架名字"就当 Agent</b>——判断依据是"决策权实际在代码还是在模型"，不是框架的宣传标签（有的框架把 Agent 只实现成固定 DAG，那其实是 Workflow）。</li>
+    <li><b>忽略可控性/安全</b>——自主性越高，单步小错可能滚雪球（错误累积）；工具接口写得烂会让模型行为指数级变差；上线前应沙箱测试、设停步条件、明确权限边界。</li>
+  </ul>
+
+  <h3>前提与失效条件</h3>
+  <p>Agent 的价值前提是：<b>成功标准能量化、反馈闭环存在、人机协同有闸口</b>。若目标含糊到连"成功"都难定义，或环境毫无反馈，Agent 容易空转。注意：Agent 概念在 LLM 之前就已存在（传统 AI/机器人学里的自主 agent），<b>这里的讨论特指以 LLM 为核心控制器的现代 LLM Agent</b>，二者别混为一谈。</p>
+</section>
+
+<!-- 5 -->
+<section class="sources">
+  <h2><span class="num">5</span>来源链接</h2>
+  <p class="sec-sub">以下为本资料关键论断的实际检索来源，按权威一手 → 综述/科普排列。所有 URL 可复现。</p>
+
+  <h3>权威一手（官方文档 / 论文 / 一手工程博客）</h3>
+  <ul>
+    <li><b>Anthropic《Building effective agents》</b>（Workflow vs Agent 判据、简单优先原则、增强型 LLM、MCP 提及）<br><a href="https://www.anthropic.com/engineering/building-effective-agents">https://www.anthropic.com/engineering/building-effective-agents</a></li>
+    <li><b>IBM Think《What are AI agents?》</b>（AI Agent 定义、目标初始化/工具推理/学习反思三阶段）<br><a href="https://www.ibm.com/think/topics/ai-agents">https://www.ibm.com/think/topics/ai-agents</a></li>
+    <li><b>KAIST CSRC《AI Agent Part 1: What is AI Agent?》</b>（观察-行动循环、Workflow 区分、策略/权限影响）<br><a href="https://csrc.kaist.ac.kr/blog?p=5696">https://csrc.kaist.ac.kr/blog?p=5696</a></li>
+    <li><b>MDPI《Understanding AI Agents—A Data-Driven Literature Review》</b>（5 大支柱形式化：Foundation Model / Memory / Planning / Tool Usage / Action）<br><a href="https://mdpi.com/2227-7390/14/9/1478">https://mdpi.com/2227-7390/14/9/1478</a></li>
+    <li><b>Model Context Protocol 官网</b>（Agent 如何连数据/工具的开放标准，"USB-C for AI"）<br><a href="https://modelcontextprotocol.io">https://modelcontextprotocol.io</a></li>
+  </ul>
+
+  <h3>综述 / 科普 / 参考资料</h3>
+  <ul>
+    <li><b>Lilian Weng《LLM Powered Autonomous Agents》</b>（Agent 三大支柱：规划/记忆/工具，领域必读综述）<br><a href="https://lilianweng.github.io/posts/2023-06-23-agent/">https://lilianweng.github.io/posts/2023-06-23-agent/</a></li>
+    <li><b>arxiv 2501.00881《Agentic Systems》</b>（LLM Agents vs LLM Workflows、模块化架构）<br><a href="https://arxiv.org/html/2501.00881">https://arxiv.org/html/2501.00881</a></li>
+    <li><b>Anthropic《Common workflow patterns for AI agents》</b>（顺序/并行/评估优化三种编排模式）<br><a href="https://claude.com/blog/common-workflow-patterns-for-ai-agents-and-when-to-use-them">https://claude.com/blog/common-workflow-patterns-for-ai-agents-and-when-to-use-them</a></li>
+    <li><b>Anthropic《Introducing the Model Context Protocol》</b>（MCP 原始发布公告）<br><a href="https://www.anthropic.com/news/model-context-protocol">https://www.anthropic.com/news/model-context-protocol</a></li>
+  </ul>
+</section>
+
+<!-- 6 -->
+<section>
+  <h2><span class="num">6</span>学习路径（进阶建议）</h2>
+  <p class="sec-sub">从零到"能给别人讲清 + 能做小 Agent"。</p>
+  <ol>
+    <li><b>前置知识</b>：了解大模型/Transformer 基本概念、什么是 prompt 与函数调用(function calling)。</li>
+    <li><b>入门（第 1 步）</b>：读 Anthropic《Building effective agents》原文前两节，先搞懂 <code>Workflow vs Agent</code> 与"何时不该上 Agent"。</li>
+    <li><b>建立心智模型</b>：读 Lilian Weng 综述前 3 章，把"规划/记忆/工具"三支柱记牢。</li>
+    <li><b>上手（小实践）</b>：用 LLM API 直连写一个最简单的 ReAct 风格循环（思考→调工具→观察），先不要上重型框架，看真实输入输出。</li>
+    <li><b>深入</b>：复现一个带工具的 Agent（如让它在沙箱里查网页/跑代码），研究记忆外置（向量库/RAG）与工具接口设计（把工具当 Junior 同事的 API 文档写）。</li>
+    <li><b>产出</b>：做一个能端到端完成的真实小任务（如自动整理资料并生成报告），并用 20 条黄金任务做周更回归，重点盯"工具误用率、越权调用、瞎编引用"。</li>
+  </ol>
+</section>
+
+<!-- 7 -->
+<section>
+  <h2><span class="num">7</span>自测与常见误区</h2>
+  <p class="sec-sub">能答对下面几题，才说明你真的"会"了，而不只是"听过"。</p>
+
+  <details class="quiz"><summary>① 一句话判断题：给 LLM 接了多个工具，但每一步和调用顺序都事先写死，这是 Agent 吗？</summary>
+  <p><b>答案：通常不算，更宜叫 Workflow（工作流）。</b>判据是"决策权在代码还是在模型"——顺序写死则流程控制权在代码，属于 agentic system 下的 Workflow 分支。</p></details>
+  <details class="quiz"><summary>② Agent 的三支柱（Lilian Weng 框架）是哪三样？</summary>
+  <p><b>答案：规划(Planning)、记忆(Memory)、工具使用(Tool Use)。</b>有的资料扩充为 5 支柱（再拆出基础模型、行动执行），思想一致。</p></details>
+  <details class="quiz"><summary>③ Agent 的"短期记忆"约等于哪个技术概念？</summary>
+  <p><b>答案：上下文学习 / 上下文窗口内的即时信息。</b>它短暂且受窗口长度限制；长期记忆才对应外部向量库＋检索。</p></details>
+  <details class="quiz"><summary>④ 哪个场景最不该用自主 Agent？</summary>
+  <p><b>答案：任务边界清楚、步骤可完整枚举、要求结果稳定一致时。</b>此时 Workflow 或单次调用更便宜可靠，硬上 Agent 是常见反模式。</p></details>
+  <details class="quiz"><summary>⑤ Agent 为什么可能比单次调用更贵、更慢？</summary>
+  <p><b>答案：</b>因为它多轮循环：每次决策都产生新的推理 token 与上下文，长期对话还要为历史/记忆付费；自主性也可能带来无效循环与错误累积。</p></details>
+  <details class="quiz"><summary>⑥ 判断题：Agent 概念是 2023 年才有的大模型专有词。</summary>
+  <p><b>答案：错。</b>"自主 Agent"在 LLM 之前已存在于传统 AI 与机器人学；本资料讨论的是以 LLM 为核心控制器的现代 LLM Agent，二者概念谱系不同。</p></details>
+
+  <h3>新手最容易犯的 4 个错误</h3>
+  <ol>
+    <li><b>一上来就套重型 Agent 框架</b>，连"需不需要 Agent"都没判断。</li>
+    <li><b>用营销标签而非决策权来判断"是不是 Agent"</b>（框架可能只是把 Workflow 起了个 Agent 名）。</li>
+    <li><b>忽略工具接口质量</b>——把工具写得像谜语，Agent 行为会指数级变差。</li>
+    <li><b>忘记安全与停步条件</b>——不加沙箱、不设最大轮数与权限边界就让 Agent 自主行动。</li>
+  </ol>
+</section>
+
+<footer>
+  <div class="check">✓ 本资料由 concept-learning-skill 生成，已完成 9 项自检</div>
+  <div>信源以近 1–2 年官方/论文为主；快速演进领域请以各官网最新版为准。生成时间：2026-09-03</div>
+</footer>
+
+</div>
+</body>
+</html>
